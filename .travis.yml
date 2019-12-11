@@ -28,6 +28,7 @@ jobs:
     - stage: Build
       script: "cargo build ${Release+--release} --verbose"
     - stage: Lint
+      before_script: rustup component add rustfmt clippy
       script: cargo fmt -- --check
 
 cache: cargo
