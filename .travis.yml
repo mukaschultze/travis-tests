@@ -12,15 +12,22 @@ env:
 before_install:
   - rustup self update
 
+stages:
+  - Build
+  - Test
+  - Lint
+  
+- stage: Build
+  script: "cargo build $BUILD --verbose"
+- stage: Test
+  script: "cargo test $BUILD --verbose"
+
 jobs:
   allow_failures:
     - rust: nightly
   fast_finish: true
-  - stage: Build
-    script: "cargo build $BUILD --verbose"
-  - stage: Tests
-    script: "cargo test $BUILD --verbose"
-  - stage: Lint
-    script: cargo fmt -- --check
+  include:
+    - stage: Lint
+      script: cargo fmt -- --check
 
 cache: cargo
