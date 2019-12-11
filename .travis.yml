@@ -12,15 +12,15 @@ env:
 before_install:
   - rustup self update
 
-stages:
-  - Build
-  - Test
-  - Lint
+# stages:
+#   - Build
+#   - Test
+#   - Lint
   
-- stage: Build
-  script: "cargo build $BUILD --verbose"
-- stage: Test
-  script: "cargo test $BUILD --verbose"
+stage: Build
+script: "cargo build $BUILD --verbose"
+stage: Test
+script: "cargo test $BUILD --verbose"
 
 jobs:
   allow_failures:
