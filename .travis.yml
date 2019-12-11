@@ -16,7 +16,6 @@ jobs:
   allow_failures:
     - rust: nightly
   fast_finish: true
-  include:
   - stage: Build
     script: "cargo build $BUILD --verbose"
   - stage: Tests
