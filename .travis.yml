@@ -18,7 +18,7 @@ stages:
   - Lint
   
 stage: Test
-script: "cargo test  --verbose"
+script: "cargo test ${Release+--release} --verbose"
 
 jobs:
   allow_failures:
