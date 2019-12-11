@@ -1,0 +1,30 @@
+language: rust
+sudo: required
+
+rust:
+  - stable
+  - beta
+  - nightly
+
+env:
+  - BUILD=--release
+  - BUILD=
+
+before_install:
+  - rustup self update
+
+matrix:
+  allow_failures:
+    - rust: nightly
+  fast_finish: true
+
+jobs:
+  include:
+  - stage: Build
+    script: "cargo build $BUILD --verbose"
+  - stage: Tests
+    script: "cargo test $BUILD --verbose"
+  - stage: Lint
+    script: cargo fmt -- --check
+
+cache: cargo
